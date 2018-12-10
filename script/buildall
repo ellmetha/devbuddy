@@ -6,12 +6,14 @@ DATE=$(date -u)
 VERSION="${TAG} [${DATE}]"
 LDFLAGS="-s -w -X \"main.Version=${VERSION}\""
 
-for GOOS in linux darwin; do
-	export GOOS
-	NAME=bud-${GOOS}-amd64
+DEVBUDDY_PLATFORMS=${DEVBUDDY_PLATFORMS:-"linux darwin"}
+
+
+for OS in ${DEVBUDDY_PLATFORMS[@]}; do
+	NAME=bud-${OS}-amd64
 
 	echo "Building $NAME"
-	GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "$LDFLAGS" -o dist/${NAME}
+	GOOS=${OS} GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "$LDFLAGS" -o dist/${NAME}
 
 	cd dist
 	shasum -a 256 ${NAME} > ${NAME}.sha256
