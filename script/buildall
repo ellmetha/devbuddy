@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eux
+set -eu
 
 TAG=$(git describe --tags --dirty --always)
 DATE=$(date -u)
