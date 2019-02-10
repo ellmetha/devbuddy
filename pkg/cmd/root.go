@@ -5,7 +5,6 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/devbuddy/devbuddy/pkg/hook"
 	"github.com/devbuddy/devbuddy/pkg/integration"
 )
 
@@ -48,7 +47,7 @@ func rootRun(cmd *cobra.Command, args []string) {
 	}
 
 	if GetFlagBool(cmd, "shell-hook") {
-		hook.Run()
+		runHook()
 		os.Exit(0)
 	}
 

@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/Flaque/filet"
 	"github.com/stretchr/testify/require"
 )
 
@@ -39,19 +38,7 @@ func (p *projectWriter) CreateGitRepo(t *testing.T) {
 	require.NoError(t, cmd.Run())
 }
 
-type manifestWriter struct {
-	path string
-}
-
 // GitInit initializes a simple Git repo
 func (p *projectWriter) Manifest() *manifestWriter {
 	return &manifestWriter{path: filepath.Join(p.path, "dev.yml")}
-}
-
-func (m *manifestWriter) Empty(t *testing.T) {
-	filet.File(t, m.path, "")
-}
-
-func (m *manifestWriter) WriteString(t *testing.T, value string) {
-	filet.File(t, m.path, value)
 }

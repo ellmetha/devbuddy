@@ -1,5 +1,6 @@
 package integration
 
+// TODO: const
 var shellSource = `
 # Be careful! This runs in the user shell.
 
